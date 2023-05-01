@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 40em;
+    margin: 2em auto;
+    color: #333;
+    padding: 0 1em;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.profile-image-container {
+    display: inline-block;
+}
+
+#profile-image {
+    width: 150px;
+    border-radius: 50%;
+}
+
+.header-content {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+h3 {
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.2em;
+}
+
+section {
+    margin-bottom: 2em;
+}
+
+article {
+    margin-bottom: 2.5em;
+}
+
+article p {
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+.inline-image {
+    height: 1em;
+    width: auto;
+    vertical-align: top;
+}
