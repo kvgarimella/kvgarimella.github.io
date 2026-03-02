@@ -1,4 +1,5 @@
 ---
+math: true
 title: "Example Blog Post"
 tags: [example, demo]
 ---
