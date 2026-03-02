@@ -1,0 +1,19 @@
+title: Karthik Garimella
+show_writing: false
+
+# Posts + Markdown
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+
+# Put posts under /blog/YYYY/MM/DD/title/
+permalink: /blog/:year/:month/:day/:title/
+
+# Default layout for posts so you don't have to write 'layout: post' each time
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post

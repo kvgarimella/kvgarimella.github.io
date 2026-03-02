@@ -52,3 +52,27 @@ article p {
     width: auto;
     vertical-align: top;
 }
+
+/* Blog post styling */
+.post-title {
+    margin-bottom: 0.2em;
+}
+.post-meta {
+    font-size: 0.95em;
+    margin-bottom: 1.2em;
+}
+.post-tags a {
+    margin-left: 0.6em;
+    text-decoration: none;
+}
+pre {
+    padding: 0.75em;
+    overflow-x: auto;
+    border-radius: 6px;
+    background: #eaeaea;
+}
+code {
+    background: #eaeaea;
+    padding: 0.1em 0.25em;
+    border-radius: 4px;
+}

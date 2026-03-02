@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9SV2XE3X77"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9SV2XE3X77');
+</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: "Karthik Garimella" }}</title>
+    <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
+</head>
+<body>
+ <header>
+<div class="profile-image-container">
+            <img src="{{ '/media/IMG.JPG' | relative_url }}" alt="Karthik Garimella" id="profile-image">
+        </div>
+        <div class="header-content">
+            <h1>Karthik Garimella</h1>
+        </div>
+ </header>
+ <main>
+   {{ content }}
+ </main>
+</body>
+</html>
