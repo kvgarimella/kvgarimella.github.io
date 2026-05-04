@@ -1,12 +1,12 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    max-width: 40em;
+    max-width: 52em;
     margin: 2em auto;
     color: #333;
     padding: 0 1em;
     /* background-color: #fffff8; */
-    background-color: #F5F5F5;
+    background-color: #fff;
 }
 
 header {
@@ -65,14 +65,218 @@ article p {
     margin-left: 0.6em;
     text-decoration: none;
 }
+
+/* Justify prose only inside blog posts */
+.post-content p,
+.post-content li {
+    text-align: justify;
+}
+
 pre {
     padding: 0.75em;
     overflow-x: auto;
     border-radius: 6px;
-    background: #eaeaea;
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
 }
 code {
     background: #eaeaea;
     padding: 0.1em 0.25em;
     border-radius: 4px;
+}
+
+/* Do not apply inline-code padding/background to fenced code blocks */
+pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* Rouge syntax highlighting (GitHub-like light theme) */
+.highlight .c,
+.highlight .c1,
+.highlight .cm {
+    color: #6e7781;
+}
+.highlight .k,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .nt {
+    color: #cf222e;
+}
+.highlight .nf,
+.highlight .fm {
+    color: #8250df;
+}
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sa,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx {
+    color: #0a3069;
+}
+.highlight .mi,
+.highlight .mf,
+.highlight .mh,
+.highlight .il,
+.highlight .m {
+    color: #0550ae;
+}
+.highlight .nb,
+.highlight .bp {
+    color: #953800;
+}
+.highlight .o,
+.highlight .ow {
+    color: #116329;
+}
+
+.trace-widget {
+    margin-top: 1.2em;
+    border: 1px solid #ccd4dd;
+    border-radius: 10px;
+    background: #f8fafc;
+    padding: 0.85em;
+}
+
+.trace-title {
+    font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+.trace-legend {
+    margin-bottom: 0.7em;
+}
+
+.trace-chip {
+    display: inline-block;
+    margin-right: 0.5em;
+    padding: 0.16em 0.5em;
+    border-radius: 999px;
+    font-size: 0.85em;
+    border: 1px solid transparent;
+}
+
+.trace-chip-runtime {
+    background: #e8edf4;
+    border-color: #c3ccd8;
+}
+
+.trace-chip-kernel {
+    background: #d8ebff;
+    border-color: #8bbfff;
+}
+
+.trace-timeline {
+    display: grid;
+    gap: 0.45em;
+}
+
+.trace-row {
+    display: grid;
+    grid-template-columns: 10.5em 1fr;
+    align-items: center;
+    gap: 0.55em;
+}
+
+.trace-row-label {
+    font-size: 0.9em;
+    color: #374151;
+}
+
+.trace-row-track {
+    position: relative;
+    height: 1.25em;
+    background: #edf2f7;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.trace-event {
+    position: absolute;
+    top: 0.06em;
+    bottom: 0.06em;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.trace-event--runtime {
+    background: #a8b3c5;
+    border-color: #95a2b6;
+}
+
+.trace-event--kernel {
+    background: #3b82f6;
+    border-color: #2563eb;
+}
+
+.trace-event:hover,
+.trace-event:focus-visible {
+    filter: brightness(0.95);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.2);
+}
+
+.trace-details {
+    margin-top: 0.8em;
+    min-height: 6.4em;
+    font-size: 0.9em;
+    background: #ffffff;
+    border: 1px solid #dbe3ea;
+    border-radius: 8px;
+    padding: 0.65em 0.75em;
+}
+
+.trace-tooltip-title {
+    font-weight: 600;
+    margin-bottom: 0.25em;
+}
+
+.trace-tooltip-list {
+    margin-top: 0.4em;
+    margin-bottom: 0;
+    padding-left: 1.2em;
+}
+
+@media (max-width: 720px) {
+    .trace-row {
+        grid-template-columns: 1fr;
+        gap: 0.25em;
+    }
+
+    .trace-row-label {
+        font-size: 0.85em;
+    }
+}
+
+.nsight-embed-wrap {
+    width: 100%;
+    margin: 0;
+    transform: none;
+    max-width: none;
+}
+
+.nsight-embed {
+    width: 100%;
+    height: 620px;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    background: #1E2128;
+    overflow: hidden;
+}
+
+@media (max-width: 900px) {
+    .nsight-embed {
+        height: 500px;
+    }
 }

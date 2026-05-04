@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Writing
-permalink: /blog/
+permalink: /writing/
 ---
 
 <ul>

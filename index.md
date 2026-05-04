@@ -14,14 +14,14 @@ title: Karthik Garimella
 </section>
 
 {% if site.show_writing %}
-<section id="blog">
+<section id="writing">
 <h3>Writing</h3>
 <ul>
     {% for post in site.posts limit:5 %}
 <li>{{ post.date | date: "%Y-%m-%d" }} — <a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
     {% endfor %}
 </ul>
-<p><a href="{{ '/blog/' | relative_url }}">All writing →</a></p>
+<p><a href="{{ '/writing/' | relative_url }}">All writing →</a></p>
 </section>
 {% endif %}
 

@@ -7,8 +7,8 @@ highlighter: rouge
 kramdown:
   input: GFM
 
-# Put posts under /blog/YYYY/MM/DD/title/
-permalink: /blog/:year/:month/:day/:title/
+# Put posts under /writing/YYYY/MM/DD/title/
+permalink: /writing/:year/:month/:day/:title/
 
 # Default layout for posts so you don't have to write 'layout: post' each time
 defaults:
