@@ -9,6 +9,10 @@ body {
     background-color: #fff;
 }
 
+body.post-page {
+    max-width: 72em;
+}
+
 header {
     text-align: center;
     margin-bottom: 2em;
