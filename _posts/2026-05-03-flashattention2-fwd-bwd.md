@@ -390,21 +390,44 @@ Using the above expression, we can now recompute *an exact tile* of $\mathbf{P}$
 
 ### Computing $\mathbf{dS}$ from $D = \mathsf{rowsum}(O \odot dO)$
 
-We start with our per-row gradient:
+We start with our per-row gradient and then distribute the upstream gradient and group terms:
+
+$$
+\begin{aligned}
+\mathbf{dS}_i
+&= \mathbf{dP}_i \left(\operatorname{diag}(\mathbf{P}_i) - \mathbf{P}_i^\top \mathbf{P}_i\right) \\
+&= \mathbf{dP}_i \operatorname{diag}(\mathbf{P}_i)
+   - \left(\mathbf{dP}_i \mathbf{P}_i^\top\right) \mathbf{P}_i.
+\end{aligned}
+$$
+
+
+First, since $ \operatorname{diag}(\mathbf{P}_i) $ has only one non-zero diagonal (the main diagonal), we can rewrite the first term in the above expression as element-wise multiply. Second, note that the grouping in the second term is an inner product so the output is just a single scalar value. We can write this term also as an element-wise multiply. 
 
 $$ 
-\mathbf{dS}_i = \mathbf{dP}_i \left(\operatorname{diag}(\mathbf{P}_i) - \mathbf{P}_i^\top \mathbf{P}_i\right)
-$$
 
-After distributing the gradient and re-arranging terms, we have an equivalent version:
+\mathbf{dS}_i = \mathbf{dP}_i \odot \mathbf{P}_i - \operatorname{sum}(\mathbf{dP}_i \odot \mathbf{P}_i) \odot \mathbf{P}_i
 
 $$
 
-\mathbf{dS} = \mathbf{P} \odot \mathbf{dP} - \mathbf{P} \odot \mathsf{rowsum}(\mathbf{P} \odot \mathbf{dP})
+Finally, we can extend *down* and write the full expression for $\mathbf{dS}$:
 
 $$
+\mathbf{dS} = \mathbf{dP} \odot \mathbf{P} - \operatorname{rowsum}(\mathbf{dP} \odot \mathbf{P}) \odot \mathbf{P}
+$$
 
-Note that the above equation uses element-wise multiplies. This is great for us since we can compute $\mathbf{dS}$ block-wise. Unfortunately, the second term requires summing over an entire row of $\mathbf{P}$. However, we may use the fact that $\mathsf{rowsum}(\mathbf{P} \odot \mathbf{dP}) = \mathsf{rowsum}(\mathbf{O} \odot \mathbf{dO})$, which we call $D$. This substitution follows from $\mathbf{O} = \mathbf{P}\mathbf{V}$ and $\mathbf{dP} = \mathbf{dO}\mathbf{V}^\top$.
+Here, $\operatorname{rowsum}$ returns a column vector, which is broadcast across the columns before multiplying by $\mathbf{P}$.
+
+Note that the above equation only uses element-wise multiplies. This is great for us since we can compute $\mathbf{dS}$ block-wise. Unfortunately, the second term requires summing over an entire row of $\mathbf{P}$. However, there is a clever substitution. First, note that $ \operatorname{rowsum}(\mathbf{dP} \odot \mathbf{P})  = \operatorname{diag}(\mathbf{dP} \mathbf{P}^\top)$. Here, $\operatorname{diag}$ is plucking out the main diagonal of an $N \times N$ matrix. Since $\mathbf{dP} = \mathbf{dO} \mathbf{V}^\top$, we can substitute and simplify $\operatorname{diag}(\mathbf{dP} \mathbf{P}^\top) = \operatorname{diag}(\mathbf{dO} \mathbf{V}^\top \mathbf{P}^\top) = \operatorname{diag}(\mathbf{dO} \mathbf{O}^T) = \operatorname{rowsum}(\mathbf{dO} \odot \mathbf{O})$. Note that both $\mathbf{dO}$ and $\mathbf{O}$ are $N \times d$, so we are now summing each row over a much smaller matrix than the $N \times N$ attention matrix $\mathbf{P}$. 
+
+Finally, putting this all together and defining $D = \operatorname{rowsum}(\mathbf{dO} \odot \mathbf{O})$, we arrive at:
+
+$$
+\mathbf{dS} = \mathbf{dP} \odot \mathbf{P} - D \odot \mathbf{P} = (\mathbf{dP} - D) \odot \mathbf{P}
+$$
+
+
+
 
 Here is a "proof by code" that shows you the step by step transformation. 
 ```python
